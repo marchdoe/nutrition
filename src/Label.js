@@ -3,13 +3,9 @@ import NutritionFacts from 'nutrition-facts';
 import './App.css';
 
 // USDA_NDB_API_KEY = 'aGHdsb4vd1kqR4GRiq9aYSWzQCgr3qCxK73IXqdR';
-
 const NF = new NutritionFacts(process.env.USDA_NDB_API_KEY);
 
-
-
-export default React.createClass({
-
+var Label = React.createClass({
   componentDidMount() {
     NF.searchFoods({
         q: 'salted butter',
@@ -27,30 +23,14 @@ export default React.createClass({
           })
 
     })
-},
+  },
 
-  // getRandomFoodItem(nuritionFacts) {
-  //   return shuffle(nuritionFacts)[0]
-  // },
-  //
-  // removeFoodItem(foodItem, nuritionFacts = this.state.unusedFoodItems) {
-  //   const selectedFoodItemIndex = nuritionFacts.indexOf(foodItem)
-  //   nuritionFacts.splice(selectedFoodItemIndex, 1)
-  //   return nuritionFacts
-  // },
-  //
-  // handleClick() {
-  //   const newFoodItem = this.getRandomFoodItem(this.state.unusedFoodItems)
-  //   const unusedFoodItems = this.removeFoodItem(newFoodItem)
-  //
-  //   this.setState({
-  //     name: newFoodItem,
-  //     details: nuritionFacts[newFoodItem],
-  //     unusedFoodItems
-  //   })
-  // },
+  getInitialState: function() {
+    if (!this.state.FoodItem) return null
+    const {FoodItem} = this.state
+  },
 
-  render() {
+  render: function() {
     return (
       <div>
         <div className="flex flex-wrap content-start border border-light p2">
@@ -228,4 +208,4 @@ export default React.createClass({
       </div>
     );
   }
-})
+});
