@@ -1,36 +1,8 @@
-import React from 'react';
-import NutritionFacts from 'nutrition-facts';
+import React, { Component } from 'react';
 import './App.css';
 
-// USDA_NDB_API_KEY = 'aGHdsb4vd1kqR4GRiq9aYSWzQCgr3qCxK73IXqdR';
-const NF = new NutritionFacts(process.env.USDA_NDB_API_KEY);
-
-var Label = React.createClass({
-  componentDidMount() {
-    NF.searchFoods({
-        q: 'salted butter',
-        ds: 'Standard Reference'
-    }).then(results => {
-        // Returns search results
-        let mySelectedItem = results.list.item[0]
-
-        // Items are returned as a FoodItem instance
-        // allowing you to call 'getNutrition' directly on the instance.
-        mySelectedItem.getNutrition()
-          .then(nutritionReport => {
-          this.setState({ FoodItem: nutritionReport })
-          console.log(nutritionReport)
-          })
-
-    })
-  },
-
-  getInitialState: function() {
-    if (!this.state.FoodItem) return null
-    const {FoodItem} = this.state
-  },
-
-  render: function() {
+class Label extends Component {
+  render() {
     return (
       <div>
         <div className="flex flex-wrap content-start border border-light p2">
@@ -38,7 +10,7 @@ var Label = React.createClass({
             <h2 className="m0 p0">
               Nutrition Facts
             </h2>
-            <h3>{FoodItem.name}</h3>
+            <h3>Food Name</h3>
           </div>
 
           <div className="col-12 pb1 border-bottom border-triple">
@@ -208,4 +180,6 @@ var Label = React.createClass({
       </div>
     );
   }
-});
+}
+
+export default Label;
